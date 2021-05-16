@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/tiles/tiles.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+medieval_grass_dark = Vector2( 0, 0 )
+medieval_grass_light = Vector2( 1, 0 )
+medieval_grass_dark_striped = Vector2( 2, 0 )
+medieval_grass_light_striped = Vector2( 3, 0 )
+medieval_dark_trees = Vector2( 4, 0 )
+medieval_light_trees = Vector2( 5, 0 )
+medieval_tree_cluster = Vector2( 6, 0 )
+medieval_small_house = Vector2( 0, 1 )
