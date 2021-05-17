@@ -1,4 +1,4 @@
-class_name DialogueBox extends Control
+class_name DialogueBox extends CanvasLayer
 
 var dialogue = [
 	'Welcome to the world of Ethereal!',
@@ -10,9 +10,9 @@ var dialogue = [
 var dialogue_index = 0
 var finished = false
 
-onready var text_label = $RichTextLabel
-onready var tween = $Tween
-onready var next_indicator = $next_indicator
+onready var text_label = $dialogue_box_container/dialogue_box/RichTextLabel
+onready var tween = $dialogue_box_container/dialogue_box/Tween
+onready var next_indicator = $dialogue_box_container/dialogue_box/next_indicator
 
 signal dialogue_complete
 

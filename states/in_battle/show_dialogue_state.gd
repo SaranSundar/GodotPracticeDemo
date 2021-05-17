@@ -2,7 +2,9 @@ class_name ShowDialogueState extends State
 
 const dialogue_scene = preload("res://interfaces/dialogue_boxes/dialogue_box.tscn")
 
-var dialogue_box: DialogueBox
+var dialogue_box
+
+var is_dialogue_complete = false
 
 func _init():
 	set_name("ShowDialogueState")
@@ -16,10 +18,12 @@ func _init():
 	
 
 func dialogue_complete():
-	print("Time to remove this resource")
+	is_dialogue_complete = true
 
-# Virtual function. Receives events from the `_unhandled_input()` callback.
-func handle_input(event: InputEvent, transition_to: FuncRef) -> void:
-	#	if event.is_action("ui_cancel"):
-	#		transition_to.call_func()
-	pass
+# Virtual function. Corresponds to the `_process()` callback.
+func update(delta: float, transition_to: FuncRef) -> void:
+	if is_dialogue_complete:
+		is_dialogue_complete = false
+		# Create new instance of exit state to reset it
+		self.queue_free()
+		transition_to.call_func()

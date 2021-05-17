@@ -23,6 +23,7 @@ func begin_battle():
 
 # Virtual function. Corresponds to the `_process()` callback.
 func update(delta: float, transition_to: FuncRef) -> void:
+	# When the begin battle button is pressed on the menu, it will transition in the state machine
 	if switch_scene:
 		switch_scene = false
 		self.exit_state.queue_free()

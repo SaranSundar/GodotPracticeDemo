@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/cursor/cursor.gd"
 }, {
-"base": "Control",
+"base": "CanvasLayer",
 "class": "DialogueBox",
 "language": "GDScript",
 "path": "res://interfaces/dialogue_boxes/dialogue_box.gd"
