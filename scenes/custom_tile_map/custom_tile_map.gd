@@ -1,5 +1,5 @@
 tool
-class_name WorldMap extends YSort
+class_name CustomTileMap extends YSort
 
 # Load Resources
 var grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
@@ -10,8 +10,8 @@ var tile_set_medieval = preload("res://resources/tiles/tile_set_medieval.tres")
 # Map constants
 var map_width_in_tiles: int = 20
 var map_height_in_tiles: int = 11
-onready var background_map = $background_layer
-onready var foreground_map = $foreground_layer
+onready var background_map: TileMap = $background_layer
+onready var foreground_map: TileMap = $foreground_layer
 
 # Editor toggles
 export(bool)  var redraw  setget set_redraw

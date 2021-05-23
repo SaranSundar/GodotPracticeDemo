@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interfaces/begin_battle_menu/begin_battle_menu.gd"
 }, {
-"base": "State",
-"class": "BeginBattleMenuState",
-"language": "GDScript",
-"path": "res://states/begin_battle/begin_battle_menu_state.gd"
-}, {
 "base": "Camera2D",
 "class": "CameraController",
 "language": "GDScript",
@@ -34,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/cursor/cursor.gd"
 }, {
+"base": "YSort",
+"class": "CustomTileMap",
+"language": "GDScript",
+"path": "res://scenes/custom_tile_map/custom_tile_map.gd"
+}, {
 "base": "CanvasLayer",
 "class": "DialogueBox",
 "language": "GDScript",
@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/grid_data/grid_data.gd"
 }, {
-"base": "State",
-"class": "InBattleState",
-"language": "GDScript",
-"path": "res://states/in_battle/in_battle_state.gd"
-}, {
 "base": "Node2D",
 "class": "Main",
 "language": "GDScript",
@@ -58,11 +53,6 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/player/player.gd"
-}, {
-"base": "State",
-"class": "ShowDialogueState",
-"language": "GDScript",
-"path": "res://states/in_battle/show_dialogue_state.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -78,28 +68,20 @@ _global_script_classes=[ {
 "class": "Tiles",
 "language": "GDScript",
 "path": "res://resources/tiles/tiles.gd"
-}, {
-"base": "YSort",
-"class": "WorldMap",
-"language": "GDScript",
-"path": "res://scenes/world_map/world_map.gd"
 } ]
 _global_script_class_icons={
 "BeginBattleMenu": "",
-"BeginBattleMenuState": "",
 "CameraController": "",
 "Common": "",
 "Cursor": "",
+"CustomTileMap": "",
 "DialogueBox": "",
 "GridData": "",
-"InBattleState": "",
 "Main": "",
 "Player": "",
-"ShowDialogueState": "",
 "State": "",
 "StateMachine": "",
-"Tiles": "",
-"WorldMap": ""
+"Tiles": ""
 }
 
 [application]

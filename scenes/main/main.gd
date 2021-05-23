@@ -5,7 +5,7 @@ const grid_data: GridData = preload("res://resources/grid_data/grid_data_resourc
 const common: Common = preload("res://resources/common/common_resource.tres")
 
 # Mouse/Cursor Scene
-onready var cursor = $Cursor
+onready var cursor = $cursor
 
 const state_machine_node = preload("res://states/state_machine.gd")
 var state_machine = null
@@ -13,6 +13,7 @@ var state_machine = null
 func _ready():
 	state_machine = state_machine_node.new()
 	add_child(state_machine)
+
 
 # The scale of items on the map are the wrong size, need different tiles for that
 #
