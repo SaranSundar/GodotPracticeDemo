@@ -1,18 +1,30 @@
 class_name Main extends Node2D
 
-# Load Resources
-const grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
-const common: Common = preload("res://resources/common/common_resource.tres")
-
 # Mouse/Cursor Scene
 onready var cursor = $cursor
 
-const state_machine_node = preload("res://states/state_machine.gd")
-var state_machine = null
+var state_machine: StateMachine = null
+
+func _init():
+	state_machine = preload("res://states/main_menu/main_menu_fsm.gd").new()
 
 func _ready():
-	state_machine = state_machine_node.new()
+	add_menu_fsm()
+
+func add_menu_fsm():
 	add_child(state_machine)
+
+# The state machine subscribes to node callbacks and delegates them to the state machine objects.
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.handle_input(event)
+
+
+func _process(delta: float) -> void:
+	state_machine.update(delta)
+
+
+func _physics_process(delta: float) -> void:
+	state_machine.physics_update(delta)
 
 
 # The scale of items on the map are the wrong size, need different tiles for that

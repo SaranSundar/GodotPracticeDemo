@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Control",
-"class": "BeginBattleMenu",
-"language": "GDScript",
-"path": "res://interfaces/begin_battle_menu/begin_battle_menu.gd"
-}, {
 "base": "Camera2D",
 "class": "CameraController",
 "language": "GDScript",
@@ -49,6 +44,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/main/main.gd"
 }, {
+"base": "StateMachine",
+"class": "MainMenuFSM",
+"language": "GDScript",
+"path": "res://states/main_menu/main_menu_fsm.gd"
+}, {
+"base": "Control",
+"class": "MainMenuScene",
+"language": "GDScript",
+"path": "res://interfaces/main_menu/main_menu.gd"
+}, {
+"base": "State",
+"class": "MainMenuState",
+"language": "GDScript",
+"path": "res://states/main_menu/main_menu_state.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -70,7 +80,6 @@ _global_script_classes=[ {
 "path": "res://resources/tiles/tiles.gd"
 } ]
 _global_script_class_icons={
-"BeginBattleMenu": "",
 "CameraController": "",
 "Common": "",
 "Cursor": "",
@@ -78,6 +87,9 @@ _global_script_class_icons={
 "DialogueBox": "",
 "GridData": "",
 "Main": "",
+"MainMenuFSM": "",
+"MainMenuScene": "",
+"MainMenuState": "",
 "Player": "",
 "State": "",
 "StateMachine": "",

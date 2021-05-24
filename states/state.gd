@@ -1,15 +1,17 @@
 class_name State extends Node
 
-# Each state can have a exit transition state
-var exit_state: State = null
+# Each state can hold a high level container scene that the states interact with
+# This container state scene is different from the one in state machine
+var state_scene = null
+var transition_to: FuncRef = null
 
 # Virtual function. Receives events from the `_unhandled_input()` callback.
-func handle_input(event: InputEvent, transition_to: FuncRef) -> void:
+func handle_input(event: InputEvent) -> void:
 	pass
 
 
 # Virtual function. Corresponds to the `_process()` callback.
-func update(delta: float, transition_to: FuncRef) -> void:
+func update(delta: float) -> void:
 	pass
 
 
@@ -26,5 +28,5 @@ func enter(data := {}) -> void:
 
 # Virtual function. Called by the state machine before changing the active state. Use this function
 # to clean up the state.
-func exit() -> State:
-	return exit_state
+func exit() -> void:
+	queue_free()

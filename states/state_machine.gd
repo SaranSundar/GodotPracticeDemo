@@ -2,10 +2,7 @@ class_name StateMachine extends Node
 
 # This is a mix of pushdown automaton and hierarchal finite state machine
 
-onready var states: Array = []
-
-# Each fsm holds a high level container scene that the states interact with
-var vont: Node2D
+var states: Array = []
 
 enum TransitionOptions {
 	# (String) Target state to transition to, if exit will just pop state of stack and queue free it
@@ -20,7 +17,10 @@ enum TransitionOptions {
 # You have to use object reference with self. for getters and setters
 var state: State = null setget set_state, get_state
 
+# --- These 2 variables below are meant to be overriden in each class that extends this one
 var transition_func_ref = funcref(self, "transition_to")
+# Each fsm holds a high level container scene that the states interact with
+var container_scene = null
 
 func set_state(_value):
 	# Should not Be able to set the state, since it's just calculated from the top of the stack
@@ -33,13 +33,10 @@ func get_state():
 func free_state():
 	var copy = self.state
 	remove_child(self.state)
-	copy.queue_free()
+	copy.exit()
 	
 func add_state(new_state: State, data: Dictionary = {}):
-	if 'should_keep' in data and data['should_keep']:
-		pass
-	else:
-		free_state()
+	new_state.transition_to = transition_func_ref
 	states.push_front(new_state)
 	# TODO: needs to actually use code that switches scenes, theres a scene transition example online
 	add_child(self.state)
@@ -53,31 +50,29 @@ func remove_state():
 	add_child(self.state)
 
 
-func _ready() -> void:
+func _init() -> void:
 	set_name("StateMachine")
 	# Extend this class and override this method, Initialize first state here and add it to states stack
 
-
-# The state machine subscribes to node callbacks and delegates them to the state objects.
-func _unhandled_input(event: InputEvent) -> void:
-	self.state.handle_input(event, transition_func_ref)
+func handle_input(event: InputEvent) -> void:
+	self.state.handle_input(event)
 
 
-func _process(delta: float) -> void:
-	self.state.update(delta, transition_func_ref)
+func update(delta: float) -> void:
+	self.state.update(delta)
 
 
-func _physics_process(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	self.state.physics_update(delta)
 
 
-# Override this method to define all possible states in the fsm
-# The data dictionary will have a key for the state to transition to
-# It will also have a key to say whether to preserve its state or to free it
-# It will also have a key whether to try and find preserved state for transition state or to create a new one
+# Will have the keys from TransitionOptions
+# Will either transition to new state by adding new state,
+# or transition to old state by exiting and popping of current state
 func transition_to(data: Dictionary = {}) -> void:
 	pass
 
 # Will return new instance of state based on state name
+# Will only be called when adding new state, or adding a state that was queue freed
 func get_transition(transition_name):
 	pass
