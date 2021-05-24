@@ -20,11 +20,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	state_machine.update(delta)
+	state_machine.update_state_machine(delta)
 
 
 func _physics_process(delta: float) -> void:
-	state_machine.physics_update(delta)
+	state_machine.physics_update_state_machine(delta)
 
 
 # The scale of items on the map are the wrong size, need different tiles for that

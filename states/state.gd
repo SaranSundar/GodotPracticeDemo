@@ -11,12 +11,12 @@ func handle_input(event: InputEvent) -> void:
 
 
 # Virtual function. Corresponds to the `_process()` callback.
-func update(delta: float) -> void:
+func update_state(delta: float) -> void:
 	pass
 
 
 # Virtual function. Corresponds to the `_physics_process()` callback.
-func physics_update(delta: float) -> void:
+func physics_update_state(delta: float) -> void:
 	pass
 
 

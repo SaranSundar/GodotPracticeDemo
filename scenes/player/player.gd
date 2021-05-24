@@ -38,10 +38,7 @@ func _ready():
 	animated_sprite.set_sprite_frames(mage_male_sprite_frames)
 	animated_sprite.set_animation(current_animation)
 
-func _process(delta):
-	# Don't move player in editor
-	if Engine.is_editor_hint(): return
-	
+func update_player(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()

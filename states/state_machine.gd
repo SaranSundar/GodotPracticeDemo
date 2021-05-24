@@ -58,11 +58,11 @@ func handle_input(event: InputEvent) -> void:
 	self.state.handle_input(event)
 
 
-func update(delta: float) -> void:
+func update_state_machine(delta: float) -> void:
 	self.state.update(delta)
 
 
-func physics_update(delta: float) -> void:
+func physics_update_state_machine(delta: float) -> void:
 	self.state.physics_update(delta)
 
 
