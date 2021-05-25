@@ -60,6 +60,19 @@ func update_state_machine(delta: float) -> void:
 func physics_update_state_machine(delta: float) -> void:
 	self.state.physics_update_state(delta)
 
+func add_container_scene(new_container_scene):
+	if is_instance_valid(self.container_scene):
+		remove_child(self.container_scene)
+		self.container_scene.queue_free()
+	self.container_scene = new_container_scene
+	add_child(self.container_scene)
+
+func cleanup_fsm():
+	# Do any cleanup logic here to delete all states
+	remove_child(self.container_scene)
+	self.container_scene.queue_free()
+	queue_free()
+
 
 # Will have the keys from TransitionOptions
 # Will either transition to new state by adding new state,

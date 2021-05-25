@@ -29,7 +29,7 @@ func add_state_machine(new_state_machine: StateMachine):
 func remove_state_machine():
 	var copy = free_state_machine()
 	# Clean up resources
-	copy.exit()
+	copy.cleanup_fsm()
 	# TODO: Not sure if this is a bug or not to free state before popping it
 	self.state_machines.pop_front()
 	# TODO: This will have a bug if the previous state was freed
