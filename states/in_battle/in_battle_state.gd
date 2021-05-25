@@ -9,4 +9,4 @@ func _ready():
 	self.add_child(self.state_scene)
 
 func update_state(delta: float):
-	self.state_scene.update_scene()
+	self.state_scene.update_scene(delta)

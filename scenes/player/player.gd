@@ -38,7 +38,7 @@ func _ready():
 	animated_sprite.set_sprite_frames(mage_male_sprite_frames)
 	animated_sprite.set_animation(current_animation)
 
-func update_player(delta):
+func update_player(delta: float):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()

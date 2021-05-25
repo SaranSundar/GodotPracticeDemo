@@ -7,6 +7,6 @@ onready var camera = $camera
 func _init():
 	self.set_name("InBattleScene")
 
-func update_scene():
-	player.update_player()
-	camera.update_camera()
+func update_scene(delta: float):
+	player.update_player(delta)
+	camera.update_camera(delta)

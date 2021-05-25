@@ -11,8 +11,7 @@ func _ready():
 	self.state_scene.exit_game_button.connect("pressed", self, "exit_game_pressed")
 
 func begin_battle_pressed():
-	# TODO: This will signal to root to change FSM
-	emit_signal("begin_battle")
+	get_node("/root/main").fsm_stack.transition_to(preload("res://states/in_battle/in_battle_fsm.gd").new())
 
 func exit_game_pressed():
 	get_tree().quit()

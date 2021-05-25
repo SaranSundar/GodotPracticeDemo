@@ -4,13 +4,8 @@ class_name StateMachine extends Node
 
 var states: Array = []
 
-enum TransitionOptions {
-	# (String) Target state to transition to, if exit will just pop state of stack and queue free it
-	TRANSITION_STATE,
-	# True/False, if true will make new instance of transition even when just resuming previous state from popping off current
-	CREATE_NEW_TRANSITION,
-	# True/False If true will signal to parent to clean up fsm
-	EXIT_STATE_MACHINE
+enum {
+	TRANSITION_STATE
 }
 
 # Only getter method established
@@ -59,18 +54,24 @@ func handle_input(event: InputEvent) -> void:
 
 
 func update_state_machine(delta: float) -> void:
-	self.state.update(delta)
+	self.state.update_state(delta)
 
 
 func physics_update_state_machine(delta: float) -> void:
-	self.state.physics_update(delta)
+	self.state.physics_update_state(delta)
 
 
 # Will have the keys from TransitionOptions
 # Will either transition to new state by adding new state,
 # or transition to old state by exiting and popping of current state
 func transition_to(data: Dictionary = {}) -> void:
-	pass
+	var transition_state = data[TRANSITION_STATE]
+	if transition_state != null:
+		# We have a state to transition to
+		add_state(transition_state, data)
+	else:
+		# We want to pop of current state
+		free_state()
 
 # Will return new instance of state based on state name
 # Will only be called when adding new state, or adding a state that was queue freed
