@@ -4,16 +4,15 @@ class_name StateMachine extends Node
 
 var states: Array = []
 
-enum {
-	TRANSITION_STATE
+enum StateOptions {
+	TRANSITION_STATE,
+	KEEP_STATE
 }
 
 # Only getter method established
 # You have to use object reference with self. for getters and setters
 var state: State = null setget set_state, get_state
 
-# --- These 2 variables below are meant to be overriden in each class that extends this one
-var transition_func_ref = funcref(self, "transition_to")
 # Each fsm holds a high level container scene that the states interact with
 var container_scene = null
 
@@ -28,21 +27,24 @@ func get_state():
 func free_state():
 	var copy = self.state
 	remove_child(self.state)
-	copy.exit()
+	return copy
 	
 func add_state(new_state: State, data: Dictionary = {}):
-	new_state.transition_to = transition_func_ref
+	new_state.state_machine = self
 	states.push_front(new_state)
 	# TODO: needs to actually use code that switches scenes, theres a scene transition example online
 	add_child(self.state)
 	self.state.enter(data)
 
 func remove_state():
-	free_state()
+	var copy = free_state()
+	copy.exit()
 	# TODO: Not sure if this is a bug or not to free state before popping it
 	states.pop_front()
 	# TODO: This will have a bug if the previous state was freed
-	add_child(self.state)
+	# Only add node if it's not already kept in tree
+	if not self.state.is_inside_tree():
+		add_child(self.state)
 
 
 func _init() -> void:
@@ -77,14 +79,22 @@ func cleanup_fsm():
 # Will have the keys from TransitionOptions
 # Will either transition to new state by adding new state,
 # or transition to old state by exiting and popping of current state
-func transition_to(data: Dictionary = {}) -> void:
-	var transition_state = data[TRANSITION_STATE]
-	if transition_state != null:
-		# We have a state to transition to
+func transition_to(data) -> void:
+	if data != null:
+		var transition_state = data[StateOptions.TRANSITION_STATE]
+		# We have a state to transition to, if not keep state then
+		# if StateOptions.KEEP_STATE is true
+		if StateOptions.KEEP_STATE in data and data[StateOptions.KEEP_STATE]:
+			pass
+			# Do nothing
+		else:
+			# Remove current state from scene tree before adding new one
+			free_state()
+		
 		add_state(transition_state, data)
 	else:
 		# We want to pop of current state
-		free_state()
+		remove_state()
 
 # Will return new instance of state based on state name
 # Will only be called when adding new state, or adding a state that was queue freed

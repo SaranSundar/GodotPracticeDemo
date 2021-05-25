@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interfaces/dialogue_boxes/dialogue_box.gd"
 }, {
+"base": "State",
+"class": "DialogueState",
+"language": "GDScript",
+"path": "res://states/dialogue_state/dialogue_state.gd"
+}, {
 "base": "Node",
 "class": "FSM_Stack",
 "language": "GDScript",
@@ -105,6 +110,7 @@ _global_script_class_icons={
 "Cursor": "",
 "CustomTileMap": "",
 "DialogueBox": "",
+"DialogueState": "",
 "FSM_Stack": "",
 "GridData": "",
 "InBattleFSM": "",

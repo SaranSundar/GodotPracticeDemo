@@ -2,6 +2,7 @@ class_name InBattleFSM extends StateMachine
 
 enum STATE_TRANSITIONS {
 	IN_BATTLE_STATE,
+	SHOW_DIALOGUE_STATE
 }
 
 func _ready():
@@ -15,3 +16,5 @@ func get_transition(transition_name):
 	match transition_name:
 		STATE_TRANSITIONS.IN_BATTLE_STATE:
 			return preload("res://states/in_battle/in_battle_state.gd").new()
+		STATE_TRANSITIONS.SHOW_DIALOGUE_STATE:
+			return preload("res://states/dialogue_state/dialogue_state.gd").new()
