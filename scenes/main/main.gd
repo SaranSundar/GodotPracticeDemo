@@ -3,31 +3,29 @@ class_name Main extends Node2D
 # Mouse/Cursor Scene
 onready var cursor = $cursor
 
-var fsm_stack: FSM_Stack = null
-var main_menu_fsm: MainMenuFSM = null
+var fsm_stack = null
 
 func _init():
-	fsm_stack = preload("res://states/fsm_stack.gd").new()
-	main_menu_fsm = preload("res://states/main_menu/main_menu_fsm.gd").new()
+	fsm_stack = FSM_Stack.new()
 
 func _ready():
 	add_menu_fsm()
 
 func add_menu_fsm():
-	fsm_stack.add_state_machine(main_menu_fsm)
+	fsm_stack.add_state_machine(MainMenuFSM.new())
 	add_child(fsm_stack)
 
 # The state machine subscribes to node callbacks and delegates them to the state machine objects.
 func _unhandled_input(event: InputEvent) -> void:
-	fsm_stack.handle_input(event)
+	fsm_stack.process_input(event)
 
 
 func _process(delta: float) -> void:
-	fsm_stack.update_state_machine(delta)
+	fsm_stack.process_update(delta)
 
 
 func _physics_process(delta: float) -> void:
-	fsm_stack.physics_update_state_machine(delta)
+	fsm_stack.process_physics_update(delta)
 
 
 # The scale of items on the map are the wrong size, need different tiles for that

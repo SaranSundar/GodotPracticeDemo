@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BaseEntity",
+"language": "GDScript",
+"path": "res://states/base_entity.gd"
+}, {
 "base": "Camera2D",
 "class": "CameraController",
 "language": "GDScript",
@@ -39,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://states/dialogue_state/dialogue_state.gd"
 }, {
-"base": "Node",
+"base": "BaseEntity",
 "class": "FSM_Stack",
 "language": "GDScript",
 "path": "res://states/fsm_stack.gd"
@@ -89,12 +94,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/player.gd"
 }, {
-"base": "Node",
+"base": "BaseEntity",
 "class": "State",
 "language": "GDScript",
 "path": "res://states/state.gd"
 }, {
-"base": "Node",
+"base": "BaseEntity",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://states/state_machine.gd"
@@ -105,6 +110,7 @@ _global_script_classes=[ {
 "path": "res://resources/tiles/tiles.gd"
 } ]
 _global_script_class_icons={
+"BaseEntity": "",
 "CameraController": "",
 "Common": "",
 "Cursor": "",
