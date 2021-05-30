@@ -11,7 +11,7 @@ func _ready():
 	load_dialogue()
 	
 func dialogue_complete():
-	transition_to(null)
+	state_machine.transition_to(null)
 
 func set_dialogue(dialogue):
 	# TODO: Should take in list of dialogue, and figure out how to break it to fit screen size.

@@ -1,14 +1,25 @@
 class_name InBattleState extends State
 
+var battle_fsm: StateMachine
+
 func _ready():
 	set_name("InBattleState")
-	transition_to(DialogueState.new(), false)
+	var in_battle_scene: InBattleScene = preload("res://scenes/in_battle/in_battle.tscn").instance()
+	add_local_scene(in_battle_scene)
+	
+	#Battle FSM
+	battle_fsm = StateMachine.new()
+	add_child(battle_fsm)
+	# Start dialog at beginning of battle state
+	battle_fsm.transition_to(DialogueState.new())
 
 
 func process_update(delta: float):
-	state_machine.container_scene.process_update(delta)
+	local_scene.process_update(delta)
+	battle_fsm.process_update(delta)
 
 func process_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		# Escape back to menu fsm
-		get_node("/root/main").fsm_stack.transition_to(null)
+		# Escape back to main menu fsm
+		battle_fsm.exit()
+		state_machine.transition_to(null)

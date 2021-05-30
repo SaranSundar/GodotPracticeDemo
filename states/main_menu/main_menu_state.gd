@@ -8,7 +8,7 @@ func _ready():
 	local_scene.exit_game_button.connect("pressed", self, "exit_game_pressed")
 
 func begin_battle_pressed():
-	get_node("/root/main").fsm_stack.transition_to(InBattleFSM.new())
+	state_machine.transition_to(InBattleState.new())
 
 func exit_game_pressed():
 	get_tree().quit()
