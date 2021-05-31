@@ -13,3 +13,7 @@ func process_update(delta: float) -> void:
 # Virtual function. Corresponds to the `_physics_process()` callback.
 func process_physics_update(delta: float) -> void:
 	pass
+
+# Called to cleanup any references
+func exit() -> void:
+	queue_free()

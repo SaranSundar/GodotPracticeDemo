@@ -9,8 +9,10 @@ func _ready():
 	
 	#Battle FSM
 	battle_fsm = StateMachine.new()
+	battle_fsm.set_name("BattleStateMachine")
 	add_child(battle_fsm)
 	# Start dialog at beginning of battle state
+	battle_fsm.transition_to(InMovementPhaseState.new())
 	battle_fsm.transition_to(DialogueState.new())
 
 

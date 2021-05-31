@@ -7,6 +7,7 @@ var state_machine = null
 
 func _ready():
 	state_machine = StateMachine.new()
+	state_machine.set_name("StateMachine")
 	add_child(state_machine)
 	state_machine.transition_to(MainMenuState.new())
 
