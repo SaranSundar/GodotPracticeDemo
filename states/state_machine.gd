@@ -2,6 +2,11 @@ class_name StateMachine extends BaseEntity
 
 # This is a mix of pushdown automaton and hierarchal finite state machine
 
+# Sometimes a state machine may want to hold a scene that the states in the state machine
+# can access. A good example of this is the in_battle_state where all of it's states
+# need access to the in_battle_scene
+var global_scene: BaseEntity = null
+
 var states: Array = []
 
 # Only getter method established
@@ -57,9 +62,18 @@ func process_physics_update(delta: float) -> void:
 	if self.state:
 		self.state.process_physics_update(delta)
 
+func add_global_scene(new_global_scene):
+	if is_instance_valid(global_scene):
+		remove_child(global_scene)
+		global_scene.queue_free()
+	global_scene = new_global_scene
+	add_child(global_scene)
+
 func exit():
 	# Do any cleanup logic here to delete all states
 	# TODO: go through each state in array and clean them up before exiting
+	remove_child(global_scene)
+	global_scene.queue_free()
 	queue_free()
 
 

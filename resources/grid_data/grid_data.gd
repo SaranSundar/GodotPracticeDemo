@@ -1,5 +1,6 @@
 class_name GridData extends Resource
 
+# TODO: The map is being randomly generated for now, so not using this data
 var current_level = [
 		[9, 9, 3, 3, 3, 3, 297, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
 		[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 9],

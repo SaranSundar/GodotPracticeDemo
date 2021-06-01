@@ -1,5 +1,5 @@
 tool
-class_name CustomTileMap extends YSort
+class_name CustomTileMap extends Node2D
 
 # Load Resources
 var grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
@@ -18,12 +18,12 @@ export(bool)  var redraw  setget set_redraw
 export(bool)  var save  setget save_scene
 
 func setup_maps():
-	setup_map($background_layer)
-	setup_map($foreground_layer)
+	setup_map($background_layer, common.background_tiles_z_index)
+	setup_map($foreground_layer, common.foreground_tiles_z_index)
 
-func setup_map(map: TileMap):
+func setup_map(map: TileMap, z_index: int):
 	map.clear()
-	map.set_z_index(common.base_tile_z_index)
+	map.set_z_index(z_index)
 	map.set_cell_size(Vector2(common.tile_size, common.tile_size))
 	# Maybe this sets the id 0 for set_call tile_atlas id
 	map.set_tileset(tile_set_medieval)
@@ -52,7 +52,7 @@ func save_scene(_value=null):
 	# get_tree().edited_scene_root
 	# packed_scene.pack(get_tree().edited_scene_root)
 	packed_scene.pack(self)
-	ResourceSaver.save("res://scenes/world_map/world_map.tscn", packed_scene)
+	# ResourceSaver.save("res://scenes/world_map/world_map.tscn", packed_scene)
 	
 	
 func generate_map(tile_coords, map: TileMap):

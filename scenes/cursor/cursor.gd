@@ -31,3 +31,4 @@ func _input(event):
 		cursor_position = event.position
 		global_position = cursor_position
 		emit_signal("cursor_moved", cursor_position)
+		

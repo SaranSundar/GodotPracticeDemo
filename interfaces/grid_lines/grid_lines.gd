@@ -6,17 +6,21 @@ const grid_data: GridData = preload("res://resources/grid_data/grid_data_resourc
 var cursor_cell_selection = null
 var cursor_hover_cell_selection = null
 var bfs: Dictionary = {}
+var current_level = null
 
 func _ready():
 	set_name("GridLines")
 	set_z_index(common.grid_lines_z_index)
+	current_level = grid_data.current_level
 
 # Virtual function. Corresponds to the `_process()` callback.
 func process_update(delta: float) -> void:
+	# Update calls _draw()
 	update()
 	
 func cursor_move_received(position):
 	cursor_hover_cell_selection = grid_data.get_cell_bounds(position, common.tile_size)
+	# print("Cursor Cell: ", cursor_hover_cell_selection)
 
 func cursor_click_received(position):
 	# Gets the row, col
@@ -35,17 +39,17 @@ func draw_cell_outline(cell, color) -> void:
 	draw_rect(rect2, color, false, 2.0)
 	
 func draw_grid_outline():
-	for r in range(len(grid_data.current_level) + 1):
+	for r in range(len(current_level) + 1):
 		var left_grid = Vector2.ZERO
 		var right_grid = Vector2.ZERO
 		left_grid.y = r * common.tile_size
-		right_grid.x = len(grid_data.current_level[0]) * common.tile_size
+		right_grid.x = len(current_level[0]) * common.tile_size
 		right_grid.y = r * common.tile_size
 		draw_line(left_grid, right_grid, Color.red, 1, true)
 	
-	for c in range(len(grid_data.current_level[0]) + 1):
+	for c in range(len(current_level[0]) + 1):
 		var top_grid = Vector2.RIGHT * c * common.tile_size
-		var bottom_grid = top_grid + Vector2.DOWN * len(grid_data.current_level) * common.tile_size
+		var bottom_grid = top_grid + Vector2.DOWN * len(current_level) * common.tile_size
 		draw_line(top_grid, bottom_grid, Color.red, 1, true)
 	
 func _draw():

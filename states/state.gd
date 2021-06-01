@@ -6,8 +6,8 @@ var local_scene = null
 var state_machine = null
 	
 func add_local_scene(new_local_scene):
-	if is_instance_valid(self.local_scene):
-		remove_child(self.local_scene)
+	if is_instance_valid(local_scene):
+		remove_child(local_scene)
 		local_scene.queue_free()
 	local_scene = new_local_scene
 	add_child(local_scene)

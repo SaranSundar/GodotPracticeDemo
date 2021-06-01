@@ -5,7 +5,8 @@ class_name Common extends Resource
 var character_z_index = 600
 var cursor_z_index = 300
 var grid_lines_z_index = 250
-var base_tile_z_index = 10
+var foreground_tiles_z_index = 270
+var background_tiles_z_index = 10
 
 # Tile Size in px
 var tile_size = 16

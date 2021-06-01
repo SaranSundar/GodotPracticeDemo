@@ -4,20 +4,19 @@ var battle_fsm: StateMachine
 
 func _ready():
 	set_name("InBattleState")
-	var in_battle_scene: InBattleScene = preload("res://scenes/in_battle/in_battle.tscn").instance()
-	add_local_scene(in_battle_scene)
-	
 	#Battle FSM
 	battle_fsm = StateMachine.new()
 	battle_fsm.set_name("BattleStateMachine")
 	add_child(battle_fsm)
+	var in_battle_scene: InBattleScene = preload("res://scenes/in_battle/in_battle.tscn").instance()
+	battle_fsm.add_global_scene(in_battle_scene)
 	# Start dialog at beginning of battle state
 	battle_fsm.transition_to(InMovementPhaseState.new())
 	battle_fsm.transition_to(DialogueState.new())
 
-
+ 
 func process_update(delta: float):
-	local_scene.process_update(delta)
+	battle_fsm.global_scene.process_update(delta)
 	battle_fsm.process_update(delta)
 
 func process_input(event: InputEvent) -> void:
