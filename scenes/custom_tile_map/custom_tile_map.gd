@@ -5,7 +5,7 @@ class_name CustomTileMap extends Node2D
 var grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
 var common: Common = preload("res://resources/common/common_resource.tres")
 var tiles: Tiles = preload("res://resources/tiles/tiles_resource.tres")
-var tile_set_medieval = preload("res://resources/tiles/tile_set_medieval.tres")
+var tile_set_medieval: TileSet = preload("res://resources/tiles/tile_set_medieval.tres")
 
 # Map constants
 var map_width_in_tiles: int = 20
@@ -13,9 +13,18 @@ var map_height_in_tiles: int = 11
 onready var background_map: TileMap = $background_layer
 onready var foreground_map: TileMap = $foreground_layer
 
+export var background_map_data = []
+export var foreground_map_data = []
+
 # Editor toggles
 export(bool)  var redraw  setget set_redraw
 export(bool)  var save  setget save_scene
+
+func _ready():
+	var tiles = tile_set_medieval.get_tiles_ids()
+	tile_set_medieval.tile_set_z_index(0, common.background_tiles_z_index)
+	tile_set_medieval.tile_set_z_index(1, common.foreground_tiles_z_index)
+	tile_set_medieval.tile_set_z_index(2, common.foreground_tiles_z_index)
 
 func setup_maps():
 	setup_map($background_layer, common.background_tiles_z_index)

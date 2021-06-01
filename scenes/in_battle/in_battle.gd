@@ -1,6 +1,6 @@
 class_name InBattleScene extends BaseEntity
 
-onready var custom_tile_map = $custom_tile_map
+onready var custom_tile_map: CustomTileMap = $custom_tile_map
 onready var player = $player
 onready var camera = $camera
 onready var grid_lines = $GridLines
