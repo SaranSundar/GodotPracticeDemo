@@ -1,10 +1,10 @@
 tool
-class_name Player extends KinematicBody2D
+class_name Player extends KinematicBody2D 
 
 
 # Load Resources
 const common: Common = preload("res://resources/common/common_resource.tres")
-const mage_male_sprite_frames = preload("res://resources/character_sprite_frames/mage_male_sprite_frames.tres")
+const mage_male_sprite_frames: SpriteFrames = preload("res://resources/character_sprite_frames/mage_male_sprite_frames.tres")
 
 export(bool)  var redraw  setget set_redraw
 
@@ -17,8 +17,6 @@ var velocity = Vector2.ZERO
 var input_vector = Vector2(0, 0)
 
 onready var animated_sprite = $AnimatedSprite
-
-
 var current_animation = "move_down"
 
 func set_redraw(_value = null):
@@ -39,6 +37,9 @@ func _ready():
 	animated_sprite.set_animation(current_animation)
 
 func process_update(delta: float):
+	pass
+
+func free_movement(delta: float):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()

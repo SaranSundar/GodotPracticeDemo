@@ -6,6 +6,11 @@ onready var camera: Camera2D = $camera
 onready var grid_lines: GridLines = $GridLines
 onready var grid_lines_hover: GridLinesHover = $GridLinesHover
 
+# Used to move players around on the map
+onready var curve: Curve2D  = $Path2D.curve
+onready var follow: PathFollow2D = $Path2D/PathFollow2D
+export var path_follow_speed: int = 60
+
 func _ready():
 	set_name("InBattleScene")
 	setup_grid_lines()
@@ -31,3 +36,38 @@ func process_update(delta: float):
 	grid_lines_hover.process_update(delta)
 	player.process_update(delta)
 	camera.process_update(delta)
+
+func start_animation(points):
+#	# Need to generate points on curve from current position to new position
+	reset_path(true, false)
+	for point in points:
+		curve.add_point(point)
+	follow.offset = 0
+	follow.unit_offset = 0.0
+	follow.loop = false
+
+func reset_path(clear_follow: bool = true, reset_player: bool = true):
+	var new_pos = follow.global_position
+	curve.clear_points()
+	
+	for child_node in follow.get_children():
+		follow.remove_child(child_node)
+	
+	if clear_follow:
+		# Need to put player back in battle scene and not under path follow
+		remove_child(player)
+		follow.add_child(player)
+	
+	if reset_player:
+		add_child(player)
+	
+	player.global_position = new_pos
+
+func animate_movement(delta: float):
+	if curve.get_point_count() <= 0:
+		return
+		
+	follow.offset += path_follow_speed * delta
+	
+	if follow.unit_offset == 1:
+		reset_path(false, true)
