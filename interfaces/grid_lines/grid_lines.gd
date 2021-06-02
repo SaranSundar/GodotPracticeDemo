@@ -1,7 +1,6 @@
 class_name GridLines extends BaseEntity
 
 const common: Common = preload("res://resources/common/common_resource.tres")
-const grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
 
 var cursor_cell_selection = null
 var cursor_hover_cell_selection = null
@@ -13,7 +12,6 @@ var tile_map: TileMap = null
 func _ready():
 	set_name("GridLines")
 	set_z_index(common.grid_lines_z_index)
-	# current_level = grid_data.current_level
 
 func update_bfs(bfs: Dictionary):
 	self.bfs = bfs

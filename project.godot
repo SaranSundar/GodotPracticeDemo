@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://states/dialogue_state/dialogue_state.gd"
 }, {
-"base": "Resource",
-"class": "GridData",
-"language": "GDScript",
-"path": "res://resources/grid_data/grid_data.gd"
-}, {
 "base": "BaseEntity",
 "class": "GridLines",
 "language": "GDScript",
@@ -59,6 +54,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interfaces/grid_lines/grid_lines_hover.gd"
 }, {
+"base": "Reference",
+"class": "GridNode",
+"language": "GDScript",
+"path": "res://resources/grid_utils/grid_node.gd"
+}, {
+"base": "Resource",
+"class": "GridUtils",
+"language": "GDScript",
+"path": "res://resources/grid_utils/grid_utils.gd"
+}, {
 "base": "BaseEntity",
 "class": "InBattleScene",
 "language": "GDScript",
@@ -67,12 +72,12 @@ _global_script_classes=[ {
 "base": "State",
 "class": "InBattleState",
 "language": "GDScript",
-"path": "res://states/in_battle/in_battle_state.gd"
+"path": "res://states/in_battle_state/in_battle_state.gd"
 }, {
 "base": "State",
 "class": "InMovementPhaseState",
 "language": "GDScript",
-"path": "res://states/in_battle/in_movement_phase_state.gd"
+"path": "res://states/in_battle_state/in_movement_phase_state.gd"
 }, {
 "base": "Node2D",
 "class": "Main",
@@ -87,7 +92,7 @@ _global_script_classes=[ {
 "base": "State",
 "class": "MainMenuState",
 "language": "GDScript",
-"path": "res://states/main_menu/main_menu_state.gd"
+"path": "res://states/main_menu_state/main_menu_state.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -117,9 +122,10 @@ _global_script_class_icons={
 "CustomTileMap": "",
 "DialogueBox": "",
 "DialogueState": "",
-"GridData": "",
 "GridLines": "",
 "GridLinesHover": "",
+"GridNode": "",
+"GridUtils": "",
 "InBattleScene": "",
 "InBattleState": "",
 "InMovementPhaseState": "",
@@ -168,6 +174,37 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [physics]

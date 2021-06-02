@@ -1,10 +1,10 @@
 class_name InBattleScene extends BaseEntity
 
 onready var custom_tile_map: CustomTileMap = $custom_tile_map
-onready var player = $player
+onready var player: Player = $player
 onready var camera: Camera2D = $camera
-onready var grid_lines = $GridLines
-onready var grid_lines_hover = $GridLinesHover
+onready var grid_lines: GridLines = $GridLines
+onready var grid_lines_hover: GridLinesHover = $GridLinesHover
 
 func _ready():
 	set_name("InBattleScene")

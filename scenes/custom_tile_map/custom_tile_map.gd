@@ -2,7 +2,6 @@ tool
 class_name CustomTileMap extends Node2D
 
 # Load Resources
-var grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
 var common: Common = preload("res://resources/common/common_resource.tres")
 var tiles: Tiles = preload("res://resources/tiles/tiles_resource.tres")
 var tile_set_medieval: TileSet = preload("res://resources/tiles/tile_set_medieval.tres")
@@ -57,7 +56,6 @@ func draw_maps():
 
 func load_resources():
 	# Load Resources
-	grid_data = load("res://resources/grid_data/grid_data_resource.tres")
 	common = load("res://resources/common/common_resource.tres")
 	tiles = load("res://resources/tiles/tiles_resource.tres")
 	tile_set_medieval = load("res://resources/tiles/tile_set_medieval.tres")

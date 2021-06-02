@@ -24,3 +24,4 @@ func process_input(event: InputEvent) -> void:
 		# Escape back to main menu fsm
 		battle_fsm.exit()
 		state_machine.transition_to(null)
+		

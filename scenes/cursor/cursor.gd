@@ -1,7 +1,6 @@
 class_name Cursor extends Node2D
 
 # Load Resources
-const grid_data: GridData = preload("res://resources/grid_data/grid_data_resource.tres")
 const common: Common = preload("res://resources/common/common_resource.tres")
 
 # Cursor Arrow Image

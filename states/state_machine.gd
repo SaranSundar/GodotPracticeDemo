@@ -19,11 +19,13 @@ func set_state(_value):
    return
 
 func get_state():
-	return states.front()
+	if self.states:
+		return states.front()
 
 func free_state():
 	var copy = self.state
-	remove_child(self.state)
+	if copy:
+		remove_child(copy)
 	return copy
 	
 func add_state(new_state, data: Dictionary = {}):
