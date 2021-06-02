@@ -21,7 +21,7 @@ func update_bfs(bfs: Dictionary):
 
 func draw_cell_outline(cell, color) -> void:
 	# On null cell, don't draw anything
-	if not cell:
+	if cell == null:
 		return
 	# Check if offset cell position is within bounds of grid before drawing
 	var tile_size = common.tile_size

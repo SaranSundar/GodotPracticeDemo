@@ -5,7 +5,7 @@ class_name Common extends Resource
 var character_z_index = 600
 var cursor_z_index = 300
 var grid_lines_z_index = 250
-var grid_lines_hover_z_index = 1500
+var grid_lines_hover_z_index = 280
 var foreground_tiles_z_index = 270
 var background_tiles_z_index = 10
 
