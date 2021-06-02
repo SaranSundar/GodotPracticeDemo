@@ -8,23 +8,12 @@ var cursor_hover_cell_selection = null
 var bfs: Dictionary = {}
 var current_level = null
 
+var tile_map: TileMap = null
+
 func _ready():
 	set_name("GridLines")
 	set_z_index(common.grid_lines_z_index)
-	current_level = grid_data.current_level
-
-# Virtual function. Corresponds to the `_process()` callback.
-func process_update(delta: float) -> void:
-	# Update calls _draw()
-	update()
-	
-func cursor_move_received(position):
-	cursor_hover_cell_selection = grid_data.get_cell_bounds(position, common.tile_size)
-	# print("Cursor Cell: ", cursor_hover_cell_selection)
-
-func cursor_click_received(position):
-	# Gets the row, col
-	cursor_cell_selection = grid_data.get_cell_bounds(position, common.tile_size)
+	# current_level = grid_data.current_level
 
 func update_bfs(bfs: Dictionary):
 	self.bfs = bfs
@@ -34,6 +23,7 @@ func draw_cell_outline(cell, color) -> void:
 	# On null cell, don't draw anything
 	if not cell:
 		return
+	# Check if offset cell position is within bounds of grid before drawing
 	var tile_size = common.tile_size
 	var rect2 = Rect2(Vector2(cell[1], cell[0]) * tile_size, Vector2(tile_size, tile_size))
 	draw_rect(rect2, color, false, 2.0)
@@ -59,7 +49,3 @@ func _draw():
 	# Will draw range of characters movement options
 	for key in bfs:
 		draw_cell_outline(bfs[key].position, Color.purple)
-	
-	# Will draw seperate color for cursor movement vs cursor click
-	draw_cell_outline(cursor_hover_cell_selection, Color.yellow)
-	draw_cell_outline(cursor_cell_selection, Color.blue)

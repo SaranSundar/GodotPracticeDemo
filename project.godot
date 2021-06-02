@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://interfaces/grid_lines/grid_lines.gd"
 }, {
 "base": "BaseEntity",
+"class": "GridLinesHover",
+"language": "GDScript",
+"path": "res://interfaces/grid_lines/grid_lines_hover.gd"
+}, {
+"base": "BaseEntity",
 "class": "InBattleScene",
 "language": "GDScript",
 "path": "res://scenes/in_battle/in_battle.gd"
@@ -114,6 +119,7 @@ _global_script_class_icons={
 "DialogueState": "",
 "GridData": "",
 "GridLines": "",
+"GridLinesHover": "",
 "InBattleScene": "",
 "InBattleState": "",
 "InMovementPhaseState": "",

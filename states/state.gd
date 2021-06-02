@@ -3,12 +3,15 @@ class_name State extends BaseEntity
 # Each state can hold a high level container scene that the states interact with
 # This container state scene is different from the one in state machine
 var local_scene = null
-var state_machine = null
+var state_machine: StateMachine = null
+
+func free_scene(scene):
+	if is_instance_valid(scene):
+		remove_child(scene)
+		scene.queue_free()
 	
 func add_local_scene(new_local_scene):
-	if is_instance_valid(local_scene):
-		remove_child(local_scene)
-		local_scene.queue_free()
+	free_scene(local_scene)
 	local_scene = new_local_scene
 	add_child(local_scene)
 
@@ -21,6 +24,5 @@ func enter(data := {}) -> void:
 # to clean up the state.
 func exit() -> void:
 	# Do any cleanup logic here to delete all states
-	remove_child(local_scene)
-	local_scene.queue_free()
+	free_scene(local_scene)
 	queue_free()

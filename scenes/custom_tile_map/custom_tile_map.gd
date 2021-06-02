@@ -25,10 +25,23 @@ func _ready():
 	tile_set_medieval.tile_set_z_index(0, common.background_tiles_z_index)
 	tile_set_medieval.tile_set_z_index(1, common.foreground_tiles_z_index)
 	tile_set_medieval.tile_set_z_index(2, common.foreground_tiles_z_index)
+	# TODO: Make a method that gets the tile set from the tile map,
+	# then iterates over all the cells in the map and returns the array
+	# with the tile info for each cell. Basically return 2d array of tiles.
 
 func setup_maps():
 	setup_map($background_layer, common.background_tiles_z_index)
 	setup_map($foreground_layer, common.foreground_tiles_z_index)
+
+func generate_dummy_map_data():
+	# This will be place holder grid just for length and width info
+	var dummy_grid = []
+	for y in range(0, map_height_in_tiles):
+		dummy_grid.append([])
+		for x in range(0, map_width_in_tiles):
+			dummy_grid[y].append(0)
+	
+	return dummy_grid
 
 func setup_map(map: TileMap, z_index: int):
 	map.clear()
@@ -65,8 +78,8 @@ func save_scene(_value=null):
 	
 	
 func generate_map(tile_coords, map: TileMap):
-	for x in range(0, map_width_in_tiles):
-		for y in range(0, map_height_in_tiles):
+	for y in range(0, map_height_in_tiles):
+		for x in range(0, map_width_in_tiles):
 			randomize()
 			var chance = randi() % 100
 			if chance <= 30:
