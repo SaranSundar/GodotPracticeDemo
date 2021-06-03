@@ -13,10 +13,6 @@ func _ready():
 	set_name("GridLines")
 	set_z_index(common.grid_lines_z_index)
 
-func update_bfs(bfs: Dictionary):
-	self.bfs = bfs
-	
-
 func draw_cell_outline(cell, color) -> void:
 	# On null cell, don't draw anything
 	if cell == null:

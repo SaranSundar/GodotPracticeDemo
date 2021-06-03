@@ -32,10 +32,11 @@ func process_update(delta: float):
 	# To the camera the starting position is (0,0)
 	#TODO: Maybe wont work if foreground map is missing some tiles if nothings on top of background
 	# var mousePosition = custom_tile_map.background_map.world_to_map(get_global_mouse_position())
-	grid_lines.process_update(delta)
-	grid_lines_hover.process_update(delta)
-	player.process_update(delta)
-	camera.process_update(delta)
+	# grid_lines.process_update(delta)
+	# grid_lines_hover.process_update(delta)
+	# player.process_update(delta)
+	# camera.process_update(delta)
+	pass
 
 func start_animation(points):
 #	# Need to generate points on curve from current position to new position
