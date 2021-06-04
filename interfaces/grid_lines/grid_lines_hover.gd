@@ -41,10 +41,30 @@ func get_cursor_drawing_path():
 	var path = []
 	var end = cursor_cell_selection
 	while end in bfs:
-		path.append((reflect_vector(end) * common.tile_size) + Vector2.ONE * common.tile_size / 2)
+		# Origin is top left of cell
+		var origin: Vector2 = reflect_vector(end) * common.tile_size
+		# We want to get mid point of cell
+		var offset: Vector2 = Vector2.ONE * common.tile_size / 2
+		var midpoint = origin + offset
+		path.append(midpoint)
 		end = bfs[end].prev_grid_node
 		if end != null:
 			end = end.position
+	
+	# This will insert point in between every existing point
+	var i = 1
+	var length = len(path)
+	while i < length:
+		var prev = path[i-1]
+		var curr = path[i]
+		var mid: Vector2
+		if prev.x == curr.x:
+			mid = Vector2(curr.x, (curr.y + prev.y)/2)
+		else:
+			mid = Vector2((curr.x + prev.x)/2, curr.y)
+		path.insert(i, mid)
+		length = len(path)
+		i += 2
 	
 	cursor_path = path
 
@@ -88,7 +108,13 @@ func array_to_line(input : Array, dist : float) -> Line2D:
 
 func draw_path():
 	if cursor_path:
-		draw_polyline(array_to_line(cursor_path, 0).points, Color.black, 2.0)
+		for i in range(len(cursor_path) -1, -1, -1):
+			var point = cursor_path[i]
+			var radius = 1.5
+			if i == 0:
+				radius = 2
+			draw_circle(point, radius, Color.white)
+		# draw_polyline(array_to_line(cursor_path, 0).points, Color.black, 2.0)
 
 func draw_cell_outline(cell, color) -> void:
 	# On null cell, don't draw anything

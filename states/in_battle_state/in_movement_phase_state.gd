@@ -33,7 +33,8 @@ func move_player():
 
 # Virtual function. Corresponds to the `_process()` callback.
 func process_update(delta: float) -> void:
-	# in_battle_scene.animate_movement(delta)
+	if in_battle_scene.grid_lines_hover.cursor_path:
+		in_battle_scene.animate_movement(delta)
 	in_battle_scene.grid_lines.process_update(delta)
 	in_battle_scene.grid_lines_hover.process_update(delta)
 	in_battle_scene.player.process_update(delta)
