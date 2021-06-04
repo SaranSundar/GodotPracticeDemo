@@ -1,5 +1,7 @@
 class_name InBattleScene extends BaseEntity
 
+const common: Common = preload("res://resources/common/common_resource.tres")
+
 onready var custom_tile_map: CustomTileMap = $custom_tile_map
 onready var player: Player = $player
 onready var camera: Camera2D = $camera
@@ -20,6 +22,7 @@ func setup_grid_lines():
 	grid_lines.current_level = custom_tile_map.generate_dummy_map_data()
 	grid_lines.tile_map = custom_tile_map.background_map
 	grid_lines_hover.tile_map = custom_tile_map.background_map
+	grid_lines_hover.connect("start_animation", self, "start_animation")
 	
 
 func connect_cursor_to_grid_lines_hover():
@@ -36,12 +39,17 @@ func process_update(delta: float):
 	# grid_lines_hover.process_update(delta)
 	# player.process_update(delta)
 	# camera.process_update(delta)
-	pass
+	
+	if grid_lines_hover.cursor_path:
+		animate_movement(delta)
 
-func start_animation(points):
-#	# Need to generate points on curve from current position to new position
+func start_animation():
+	# Need to generate points on curve from current position to new position
+	# TODO: Maybe subtract each point by global position
 	reset_path(true, false)
-	for point in points:
+	for i in range(len(grid_lines_hover.cursor_path) -1, -1, -1):
+		var offset: Vector2 = Vector2.ONE * common.tile_size / 2
+		var point = grid_lines_hover.cursor_path[i] - offset
 		curve.add_point(point)
 	follow.offset = 0
 	follow.unit_offset = 0.0
@@ -67,8 +75,10 @@ func reset_path(clear_follow: bool = true, reset_player: bool = true):
 func animate_movement(delta: float):
 	if curve.get_point_count() <= 0:
 		return
-		
+	
 	follow.offset += path_follow_speed * delta
+	player.rotation_degrees = -follow.rotation_degrees
 	
 	if follow.unit_offset == 1:
+		player.rotation_degrees = 0
 		reset_path(false, true)

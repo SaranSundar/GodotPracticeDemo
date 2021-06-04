@@ -8,6 +8,8 @@ var bfs: Dictionary = {}
 var tile_map: TileMap = null
 var cursor_path: Array = []
 
+signal start_animation
+
 
 func _ready():
 	set_name("GridLinesHover")
@@ -36,6 +38,7 @@ func cursor_move_received():
 func cursor_click_received(_value):
 	cursor_cell_selection = get_mouse_pos_as_tile_coords()
 	get_cursor_drawing_path()
+	emit_signal("start_animation")
 
 func get_cursor_drawing_path():
 	var path = []
