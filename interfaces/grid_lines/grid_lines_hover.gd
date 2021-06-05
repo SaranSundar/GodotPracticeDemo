@@ -147,6 +147,7 @@ func draw_path():
 		# draw_polyline(array_to_line(cursor_path, 0).points, Color.black, 2.0)
 
 func draw_cell_hover_sprite():
+	# TODO: Replace with sword sprite
 	if cursor_hover_cell_selection:
 		var offset: Vector2 = Vector2.ONE * common.tile_size / 2
 		var dest = reflect_vector(cursor_hover_cell_selection) * common.tile_size

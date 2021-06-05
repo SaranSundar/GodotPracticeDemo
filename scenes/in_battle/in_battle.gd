@@ -4,7 +4,7 @@ const common: Common = preload("res://resources/common/common_resource.tres")
 
 onready var custom_tile_map: CustomTileMap = $custom_tile_map
 onready var player: Player = $player
-onready var camera: Camera2D = $camera
+onready var camera: CameraController = $camera
 onready var grid_lines: GridLines = $GridLines
 onready var grid_lines_hover: GridLinesHover = $GridLinesHover
 
@@ -15,7 +15,9 @@ export var path_follow_speed: int = 60
 
 func _ready():
 	set_name("InBattleScene")
+	set_player_cell(Vector2(1, 2))
 	setup_grid_lines()
+	camera.allow_free_movement = true
 
 func setup_grid_lines():
 	connect_cursor_to_grid_lines_hover()
@@ -42,6 +44,20 @@ func process_update(delta: float):
 	
 	if grid_lines_hover.cursor_path:
 		animate_movement(delta)
+
+func reflect_vector(vector: Vector2):
+	return Vector2(vector.y, vector.x)
+
+# Returns x,y
+func get_player_cell() -> Vector2:
+	var player_cell = custom_tile_map.background_map.world_to_map(player.position)
+	player_cell = reflect_vector(player_cell)
+	return player_cell
+
+# Accepts a row, col, returns an x,y
+func set_player_cell(destination: Vector2):
+	destination = reflect_vector(destination) * common.tile_size
+	player.global_position = destination
 
 func start_animation():
 	# Need to generate points on curve from current position to new position
