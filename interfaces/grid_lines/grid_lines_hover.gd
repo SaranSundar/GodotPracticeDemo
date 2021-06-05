@@ -8,7 +8,11 @@ var bfs: Dictionary = {}
 var tile_map: TileMap = null
 var cursor_path: Array = []
 
+var is_active_state = false
+
 signal start_animation
+
+var animating_player = false
 
 
 func _ready():
@@ -16,8 +20,12 @@ func _ready():
 	set_z_index(common.grid_lines_hover_z_index)
 
 func process_update(delta: float) -> void:
+	if not is_active_state:
+		return
 	# Update calls _draw()
-	cursor_move_received()
+	if not animating_player:
+		# Don't draw new path while player is moving
+		cursor_move_received()
 	update()
 
 func reflect_vector(vector: Vector2):
@@ -33,21 +41,40 @@ func get_mouse_pos_as_tile_coords():
 	
 # Mouse hover called every frame
 func cursor_move_received():
-	cursor_hover_cell_selection = get_mouse_pos_as_tile_coords()
+	# TODO: Optimize so you don't keep recalculating the same path if you move cursor around,
+	# optionally have a cache of paths or precalculate all paths
+	var mouse_coords = get_mouse_pos_as_tile_coords()
+	if mouse_coords in bfs:
+		cursor_hover_cell_selection = mouse_coords
+		get_cursor_drawing_path()
+	else:
+		cursor_hover_cell_selection = null
+		cursor_path = []
 
 func cursor_click_received(_value):
-	cursor_cell_selection = get_mouse_pos_as_tile_coords()
-	get_cursor_drawing_path()
-	emit_signal("start_animation")
+	if not is_active_state:
+		return
+	# Don't listen to mouse clicks while player is animating and moving
+	if animating_player:
+		return
+	
+	var mouse_coords = get_mouse_pos_as_tile_coords()
+	if mouse_coords in bfs:
+		cursor_cell_selection = mouse_coords
+		# Parent class will set this to false when animation is done
+		animating_player = true
+		emit_signal("start_animation")
+	else:
+		cursor_cell_selection = null
 
 func get_cursor_drawing_path():
 	var path = []
-	var end = cursor_cell_selection
+	var end = cursor_hover_cell_selection
+	var offset: Vector2 = Vector2.ONE * common.tile_size / 2
 	while end in bfs:
 		# Origin is top left of cell
 		var origin: Vector2 = reflect_vector(end) * common.tile_size
 		# We want to get mid point of cell
-		var offset: Vector2 = Vector2.ONE * common.tile_size / 2
 		var midpoint = origin + offset
 		path.append(midpoint)
 		end = bfs[end].prev_grid_node
@@ -119,17 +146,31 @@ func draw_path():
 			draw_circle(point, radius, Color.white)
 		# draw_polyline(array_to_line(cursor_path, 0).points, Color.black, 2.0)
 
+func draw_cell_hover_sprite():
+	if cursor_hover_cell_selection:
+		var offset: Vector2 = Vector2.ONE * common.tile_size / 2
+		var dest = reflect_vector(cursor_hover_cell_selection) * common.tile_size
+		dest += offset
+		draw_circle(dest, 2.5, Color.aqua)
+
 func draw_cell_outline(cell, color) -> void:
 	# On null cell, don't draw anything
 	if cell == null:
 		return
 	# Check if offset cell position is within bounds of grid before drawing
 	var tile_size = common.tile_size
-	var rect2 = Rect2(Vector2(cell[1], cell[0]) * tile_size, Vector2(tile_size, tile_size))
+	var rect2 = Rect2(reflect_vector(cell) * tile_size, Vector2(tile_size, tile_size))
 	draw_rect(rect2, color, false, 2.0)
 	
-func _draw():	
-	# Will draw seperate color for cursor movement vs cursor click
-	draw_cell_outline(cursor_hover_cell_selection, Color.yellow)
+func _draw():
+	if not is_active_state:
+		return
+	
+	# Will draw range of characters movement options
+	for key in bfs:
+		draw_cell_outline(bfs[key].position, Color.purple)
+		
+	#TODO: Draw sword or cursor for end of path here
 	draw_cell_outline(cursor_cell_selection, Color.blue)
 	draw_path()
+	draw_cell_hover_sprite()

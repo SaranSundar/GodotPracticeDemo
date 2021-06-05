@@ -46,9 +46,10 @@ func process_update(delta: float):
 func start_animation():
 	# Need to generate points on curve from current position to new position
 	# TODO: Maybe subtract each point by global position
+	var offset: Vector2 = Vector2.ONE * common.tile_size / 2
+	follow.global_position = grid_lines_hover.cursor_path[-1] - offset
 	reset_path(true, false)
 	for i in range(len(grid_lines_hover.cursor_path) -1, -1, -1):
-		var offset: Vector2 = Vector2.ONE * common.tile_size / 2
 		var point = grid_lines_hover.cursor_path[i] - offset
 		curve.add_point(point)
 	follow.offset = 0
@@ -79,6 +80,7 @@ func animate_movement(delta: float):
 	follow.offset += path_follow_speed * delta
 	player.rotation_degrees = -follow.rotation_degrees
 	
-	if follow.unit_offset == 1:
+	if follow.unit_offset == 1 or curve.get_point_count() == 1:
 		player.rotation_degrees = 0
 		reset_path(false, true)
+		grid_lines_hover.animating_player = false

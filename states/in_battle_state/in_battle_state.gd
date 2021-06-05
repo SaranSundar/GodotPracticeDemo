@@ -16,6 +16,11 @@ func _ready():
 
  
 func process_update(delta: float):
+	if battle_fsm.state.name == "DialogueState":
+		battle_fsm.global_scene.grid_lines_hover.is_active_state = false
+	else:
+		battle_fsm.global_scene.grid_lines_hover.is_active_state = true
+		
 	battle_fsm.global_scene.process_update(delta)
 	battle_fsm.process_update(delta)
 

@@ -4,7 +4,6 @@ const common: Common = preload("res://resources/common/common_resource.tres")
 
 var cursor_cell_selection = null
 var cursor_hover_cell_selection = null
-var bfs: Dictionary = {}
 var current_level = null
 
 var tile_map: TileMap = null
@@ -39,7 +38,3 @@ func draw_grid_outline():
 func _draw():
 	# Draws outline of entire grid
 	draw_grid_outline()
-	
-	# Will draw range of characters movement options
-	for key in bfs:
-		draw_cell_outline(bfs[key].position, Color.purple)

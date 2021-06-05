@@ -20,7 +20,6 @@ func _ready():
 	# This state is called for each player controlled character
 	tile_map_grid = in_battle_scene.grid_lines.current_level
 	var bfs = grid_utils.search_for_tiles(starting_cell, movement_range)
-	in_battle_scene.grid_lines.bfs = bfs
 	in_battle_scene.grid_lines_hover.bfs = bfs
 
 # Virtual function. Corresponds to the `_process()` callback.
