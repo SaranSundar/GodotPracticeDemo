@@ -13,6 +13,8 @@ onready var curve: Curve2D  = $Path2D.curve
 onready var follow: PathFollow2D = $Path2D/PathFollow2D
 export var path_follow_speed: int = 60
 
+signal movement_ended
+
 func _ready():
 	set_name("InBattleScene")
 	set_player_cell(Vector2(1, 2))
@@ -42,8 +44,9 @@ func process_update(delta: float):
 	# player.process_update(delta)
 	# camera.process_update(delta)
 	
-	if grid_lines_hover.cursor_path:
-		animate_movement(delta)
+#	if grid_lines_hover.cursor_path:
+#		animate_movement(delta)
+	pass
 
 func reflect_vector(vector: Vector2):
 	return Vector2(vector.y, vector.x)
@@ -100,3 +103,4 @@ func animate_movement(delta: float):
 		player.rotation_degrees = 0
 		reset_path(false, true)
 		grid_lines_hover.animating_player = false
+		emit_signal("movement_ended")
