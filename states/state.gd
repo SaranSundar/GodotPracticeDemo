@@ -17,6 +17,7 @@ func add_local_scene(new_local_scene):
 
 # Virtual function. Called by the state machine upon changing the active state. The `data` parameter
 # is a dictionary with arbitrary data the state can use to initialize itself.
+# On Ready is called only once, but enter is called every time the state is added back to the top of the stack
 func enter(data := {}) -> void:
 	pass
 

@@ -35,13 +35,14 @@ func add_state(new_state, data: Dictionary = {}):
 	add_child(self.state)
 	self.state.enter(data)
 
-func remove_state():
+func remove_state(data: Dictionary = {}):
 	var copy = free_state()
 	copy.exit()
 	# TODO: Not sure if this is a bug or not to free state before popping it
 	states.pop_front()
 	# TODO: This will have a bug if the previous state was freed
 	add_child(self.state)
+	self.state.enter(data)
 
 
 func _init() -> void:
@@ -89,4 +90,4 @@ func transition_to(transition_state, data: Dictionary = {}) -> void:
 		add_state(transition_state, data)
 	else:
 		# We want to pop of current state and call exit on it
-		remove_state()
+		remove_state(data)

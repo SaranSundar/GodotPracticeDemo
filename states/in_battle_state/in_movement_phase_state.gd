@@ -8,6 +8,10 @@ var in_battle_scene: InBattleScene
 var movement_range: int = 4
 var tile_map_grid: Array
 
+var starting_cell: Vector2 = Vector2(1, 2)
+
+var bfs: Dictionary
+
 signal exit_battle_state
 
 # When this state starts a player is selected for movement,
@@ -19,12 +23,14 @@ func _ready():
 	in_battle_scene = state_machine.global_scene
 	# This state is called for each player controlled character
 	tile_map_grid = in_battle_scene.grid_lines.current_level
-	var bfs = grid_utils.search_for_tiles(in_battle_scene.get_player_cell(), movement_range)
-	in_battle_scene.grid_lines_hover.bfs = bfs
 	in_battle_scene.connect("movement_ended", self, "movement_ended")
 
+func enter(data := {}) -> void:
+	in_battle_scene.set_player_cell(starting_cell)
+	bfs = grid_utils.search_for_tiles(in_battle_scene.get_player_cell(), movement_range)
+	in_battle_scene.grid_lines_hover.bfs = bfs
+
 func movement_ended():
-	print("Transition to attack phase")
 	state_machine.transition_to(InAttackPhaseState.new())
 
 # Virtual function. Corresponds to the `_process()` callback.

@@ -17,7 +17,15 @@ func _ready():
 	in_battle_scene = state_machine.global_scene
 	# This state is called for each player controlled character
 	tile_map_grid = in_battle_scene.grid_lines.current_level
+
+func enter(data := {}) -> void:
 	#TODO: Clear grid and change it to show attack range
+	in_battle_scene.grid_lines_hover.bfs = {}
+
+
+# Virtual function. Corresponds to the `_process()` callback.
+func process_update(delta: float) -> void:
+	in_battle_scene.camera.process_update(delta)
 
 func process_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

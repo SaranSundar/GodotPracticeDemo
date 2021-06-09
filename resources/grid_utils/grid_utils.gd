@@ -17,7 +17,7 @@ func get_cost_of_cell(position: Vector2):
 func sort_grid_nodes(a: GridNode, b: GridNode):
 	return a.cumulative_cost < b.cumulative_cost
 
-func search_for_tiles(start: Vector2, limit: int):
+func search_for_tiles(start: Vector2, limit: int) -> Dictionary:
 	var locations = {}
 	# This needs to be priority queue
 	var cells_to_visit = [GridNode.new(start, 0, null)]

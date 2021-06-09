@@ -17,7 +17,6 @@ signal movement_ended
 
 func _ready():
 	set_name("InBattleScene")
-	set_player_cell(Vector2(1, 2))
 	setup_grid_lines()
 	camera.allow_free_movement = true
 
