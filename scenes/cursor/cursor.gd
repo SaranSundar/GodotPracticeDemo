@@ -15,11 +15,14 @@ signal cursor_moved(position)
 signal cursor_clicked(position)
 
 func _ready():
+	setup_cursor()
+
+func setup_cursor():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Input.set_use_accumulated_input(false)
 	Input.set_custom_mouse_cursor(cursor_icon, Input.CURSOR_ARROW, Vector2(40, 120))
 	self.set_z_index(common.cursor_z_index)
-
+	
 func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and event.pressed:
