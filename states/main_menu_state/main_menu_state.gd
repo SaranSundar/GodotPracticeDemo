@@ -1,6 +1,6 @@
 class_name MainMenuState extends State
 
-onready var cursor: Cursor = get_node("/root/main/cursor")
+# onready var cursor: Cursor = get_node("/root/main/cursor")
 
 func _ready():
 	set_name("MainMenuState")
@@ -10,7 +10,7 @@ func _ready():
 	local_scene.exit_game_button.connect("pressed", self, "exit_game_pressed")
 
 func begin_battle_pressed():
-	cursor.setup_cursor()
+	# cursor.setup_cursor()
 	state_machine.transition_to(InBattleState.new())
 
 func exit_game_pressed():
