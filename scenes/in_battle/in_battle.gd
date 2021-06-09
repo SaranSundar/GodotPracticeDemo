@@ -47,8 +47,14 @@ func process_update(delta: float):
 #		animate_movement(delta)
 	pass
 
-func reflect_vector(vector: Vector2):
+func reflect_vector(vector: Vector2) -> Vector2:
 	return Vector2(vector.y, vector.x)
+
+func round_to_dec(num: float, digit: int) -> float:
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+
+func round_vector(vector: Vector2, digit: int) -> Vector2:
+	return Vector2(round_to_dec(vector.x, digit), round_to_dec(vector.y, digit))
 
 # Returns x,y
 func get_player_cell() -> Vector2:
@@ -90,16 +96,21 @@ func reset_path(clear_follow: bool = true, reset_player: bool = true):
 		add_child(player)
 	
 	player.global_position = new_pos
+	
 
 func animate_movement(delta: float):
 	if curve.get_point_count() <= 0:
 		return
-	
+	var prev_pos = round_vector(follow.position, 2)
 	follow.offset += path_follow_speed * delta
 	player.rotation_degrees = -follow.rotation_degrees
+	var next_pos = round_vector(follow.position, 2)
+	player.update_animation(prev_pos, next_pos)
 	
 	if follow.unit_offset == 1 or curve.get_point_count() == 1:
 		player.rotation_degrees = 0
+		player.update_animation(Vector2.UP, Vector2.DOWN)
 		reset_path(false, true)
 		grid_lines_hover.animating_player = false
 		emit_signal("movement_ended")
+

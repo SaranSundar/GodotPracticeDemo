@@ -39,6 +39,22 @@ func _ready():
 func process_update(delta: float):
 	pass
 
+func update_animation(prev_pos: Vector2, next_pos: Vector2):
+	input_vector = next_pos - prev_pos
+	input_vector = input_vector.normalized()
+	
+	if input_vector.x > 0:
+		current_animation = "move_right"
+	elif input_vector.x < 0:
+		current_animation = "move_left"
+	elif input_vector.y < 0:
+		current_animation = "move_up"
+	elif input_vector.y > 0:
+		current_animation = "move_down"
+	
+	animated_sprite.set_animation(current_animation)
+	animated_sprite.play()
+
 func free_movement(delta: float):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
