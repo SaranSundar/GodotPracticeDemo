@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     container:
-      image: barichello/godot-ci:3.2.2
+      image: barichello/godot-ci:${GODOT_VERSION}
 
     steps:
       - name: Checkout
