@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "TextureButton",
+"class": "AttackButton",
+"language": "GDScript",
+"path": "res://interfaces/attack_menu/attack_button.gd"
+}, {
 "base": "Node2D",
 "class": "BaseEntity",
 "language": "GDScript",
@@ -120,6 +125,7 @@ _global_script_classes=[ {
 "path": "res://resources/tiles/tiles.gd"
 } ]
 _global_script_class_icons={
+"AttackButton": "",
 "BaseEntity": "",
 "CameraController": "",
 "Common": "",
@@ -157,7 +163,7 @@ window/size/height=180
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [importer_defaults]
 

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/button_bg.png" type="Texture" id=1]
+[ext_resource path="res://assets/sword.png" type="Texture" id=2]
+[ext_resource path="res://interfaces/attack_menu/attack_button.gd" type="Script" id=3]
+[ext_resource path="res://assets/attack_menu/star3.png" type="Texture" id=4]
+
+[node name="attack_button" type="TextureButton"]
+margin_left = 1.23751
+margin_top = 1.41429
+margin_right = 115.238
+margin_bottom = 17.4143
+texture_normal = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 103.0
+margin_bottom = 18.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="attack_name" type="Label" parent="."]
+margin_left = 17.1163
+margin_top = 1.87683
+margin_right = 60.1163
+margin_bottom = 32.8768
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Lance
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="attack_icon" type="Sprite" parent="."]
+position = Vector2( 8.41811, 7.81083 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="attack_power" type="Sprite" parent="."]
+position = Vector2( 61.9036, 8.35885 )
+texture = ExtResource( 4 )
