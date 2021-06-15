@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star4.png-dea8d3264c82c74c68a5fea295cf922d.stex"
+path="res://.import/not_selected.png-42c8cc10ffd5faa7f8fc0c79b6b0f48d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/attack_menu/star4.png"
-dest_files=[ "res://.import/star4.png-dea8d3264c82c74c68a5fea295cf922d.stex" ]
+source_file="res://assets/attack_menu/button/not_selected.png"
+dest_files=[ "res://.import/not_selected.png-42c8cc10ffd5faa7f8fc0c79b6b0f48d.stex" ]
 
 [params]
 

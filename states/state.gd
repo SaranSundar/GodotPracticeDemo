@@ -9,6 +9,13 @@ func free_scene(scene):
 	if is_instance_valid(scene):
 		remove_child(scene)
 		scene.queue_free()
+
+func remove_scene(scene):
+	if is_instance_valid(scene):
+		remove_child(scene)
+
+func add_scene(scene):
+	add_child(scene)
 	
 func add_local_scene(new_local_scene):
 	free_scene(local_scene)

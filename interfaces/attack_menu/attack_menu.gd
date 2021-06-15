@@ -1,7 +1,8 @@
-class_name AttackMenu extends Control
-
+class_name AttackMenu extends CanvasLayer
 # List of attack buttons
-onready var attack_options = $ColorRect/VBoxContainer.get_children()
+onready var attack_options = $Control/ColorRect/VBoxContainer.get_children()
+
+signal attack_selected(attack_details)
 
 onready var attacks = [
 	{
@@ -27,6 +28,11 @@ func _ready():
 		var attack = attack_options[i] as AttackButton
 		attack.set_attack_details(attacks[i])
 		attack.connect("attack_clicked", self, "attack_clicked")
+	
+	focus_on_button(0)
+
+func focus_on_button(index):
+	attack_options[index].grab_focus()
 
 func attack_clicked(attack_info):
-	print(attack_info)
+	emit_signal("attack_selected", attack_info)

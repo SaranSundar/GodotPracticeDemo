@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interfaces/attack_menu/attack_button.gd"
 }, {
-"base": "Control",
+"base": "CanvasLayer",
 "class": "AttackMenu",
 "language": "GDScript",
 "path": "res://interfaces/attack_menu/attack_menu.gd"
